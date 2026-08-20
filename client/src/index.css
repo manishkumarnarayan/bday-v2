@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-outfit: 'Outfit', sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-hand: 'Caveat', cursive;
+  }
+
+  body {
+    font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: #0d0e15;
+    color: #2e2836;
+    overflow-x: hidden;
+    transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    border: none;
+    display: block;
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+
+}
+
+/* Custom Neumorphic and Glassmorphic Styles */
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+.font-serif-title {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Light Theme Neumorphism */
+.neu-flat {
+  background: #fdfbf7;
+  box-shadow: 9px 9px 20px rgba(215, 200, 192, 0.42), -9px -9px 20px rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.neu-button {
+  background: linear-gradient(145deg, #ffffff, #f7f1eb);
+  box-shadow: 6px 6px 14px rgba(210, 195, 185, 0.45), -6px -6px 14px rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-button:hover {
+  box-shadow: 8px 8px 18px rgba(200, 180, 170, 0.5), -8px -8px 18px rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+.neu-button:active {
+  box-shadow: inset 3px 3px 6px rgba(200, 185, 175, 0.5), inset -3px -3px 6px rgba(255, 255, 255, 0.85);
+  transform: translateY(1px);
+}
+
+.neu-pressed {
+  background: #f5efe8;
+  box-shadow: inset 4px 4px 8px rgba(200, 185, 175, 0.45), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+
+.neu-pill {
+  background: #fffafa;
+  box-shadow: 4px 4px 10px rgba(220, 200, 195, 0.35), -4px -4px 10px rgba(255, 255, 255, 0.95);
+  border-radius: 9999px;
+}
+
+/* Dark Theme Neumorphism for Intro */
+.neu-dark-flat {
+  background: #14151f;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.6), -6px -6px 16px rgba(40, 43, 60, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neu-dark-btn {
+  background: linear-gradient(145deg, #1e2030, #13141f);
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.55), -5px -5px 12px rgba(45, 48, 68, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-dark-btn:hover {
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.7), -6px -6px 16px rgba(60, 64, 90, 0.35);
+  transform: translateY(-2px);
+}
+
+.neu-dark-btn:active {
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.7), inset -3px -3px 6px rgba(45, 48, 68, 0.2);
+  transform: translateY(1px);
+}
+
+/* Glassmorphic Cards & Overlays */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 15px 35px -5px rgba(225, 175, 175, 0.2), 0 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(220, 180, 190, 0.18);
+}
+
+.glass-dark-panel {
+  background: rgba(22, 24, 37, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.glass-modal {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 25px 50px -12px rgba(210, 140, 160, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Glowing Aura Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(45deg);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(215, 175, 185, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 150, 165, 0.6);
+}
+
