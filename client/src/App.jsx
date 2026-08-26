@@ -18,7 +18,7 @@ export default function App() {
   const isDark = currentStep === 0;
 
   const handleNext = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 6));
+    setCurrentStep((prev) => Math.min(prev + 1, 5));
   };
 
   const handleSelectStep = (step) => {
@@ -116,7 +116,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {currentStep === 5 && (
+          {/* {currentStep === 5 && (
             <motion.div
               key="game-bubbles"
               initial={{ opacity: 0, y: 20 }}
@@ -127,9 +127,9 @@ export default function App() {
             >
               <GameBubblePop onNext={handleNext} />
             </motion.div>
-          )}
+          )} */}
 
-          {currentStep === 6 && (
+          {currentStep === 5 && (
             <motion.div
               key="finale"
               initial={{ opacity: 0, scale: 0.95 }}

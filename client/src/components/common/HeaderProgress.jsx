@@ -9,8 +9,7 @@ const STAGES = [
   { id: 2, title: "Wishes", icon: "⭐" },
   { id: 3, title: "Trivia", icon: "💡" },
   { id: 4, title: "Cake", icon: "🎂" },
-  { id: 5, title: "Bubbles", icon: "🫧" },
-  { id: 6, title: "Letter", icon: "💌" },
+  { id: 5, title: "Letter", icon: "💌" },
 ];
 
 export default function HeaderProgress({ currentStep, onSelectStep, isDark }) {

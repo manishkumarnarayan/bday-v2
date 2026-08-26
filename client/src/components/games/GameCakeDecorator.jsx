@@ -227,7 +227,7 @@ export default function GameCakeDecorator({ onNext }) {
                   whileTap={{ scale: 0.95 }}
                   className="neu-button w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-full text-rose-950 font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 border border-white shadow-md"
                 >
-                  <span>Next: Compliment Bubbles</span>
+                  <span>Next: Letter</span>
                   <ArrowRightIcon className="w-4 h-4 text-rose-500" />
                 </motion.button>
               </div>
