@@ -201,26 +201,31 @@ export default function ScratchCardFinale({ onRestart }) {
           {/* Letter Body Paragraphs */}
           <div className="space-y-3 sm:space-y-4 font-sans text-xs sm:text-base text-rose-950/85 leading-relaxed font-light">
             <p>
-              On <strong>August 29, 2008</strong>, something truly extraordinary
-              entered this world. You came with a spirit that brings gentle
-              comfort to those around you, an infectious laughter that makes
-              gloomy days bright, and a heart that always knows how to care.
+              Happy 18th Birthday, Sanjana! 🥹❤️ Finally 18… officially one
+              more year older, but hopefully not one year more mature, because
+              thodi si pagalpan wali Sanjana zyada achhi lagti hai 😂. Jokes
+              apart, I genuinely hope this new chapter of your life brings you a
+              lot of happiness, success, peace and countless reasons to smile.
+              ✨ You deserve all the good things coming your way, and I hope
+              life gives you everything you secretly wish for. 🌸
             </p>
             <p>
-              Growing through every chapter, you have handled life with an
-              admirable blend of grace, resilience, and quiet determination.
-              Never underestimate how much your kindness matters or how many
-              lives are made better simply because you are in them.
+              There are some people who, without even trying, somehow become a
+              little more special than others… and I guess you are one of those
+              people for me. ❤️ I don't know if you've ever noticed, but talking
+              to you, seeing you smile, or even just having you around somehow
+              makes an ordinary day feel a little better. Maybe I've never said
+              it properly, maybe I don't even know how to say it without making
+              things awkward 😭, so I'll just leave a few things unsaid… maybe
+              someday you'll get it. 🙃❤️
             </p>
             <p>
-              As you celebrate this birthday, may this year unfold like a dream:
-              filled with unforgettable adventures, peace in your mind, laughter
-              with the people you cherish, and all the success and love that you
-              so unconditionally deserve.
-            </p>
-            <p className="font-medium text-rose-900">
-              Never stop being the bright, radiant, and wonderful Sanjana that
-              you are. Keep shining like the brightest star in the night sky! ✨
+              On your special day, I just want you to know that I'm genuinely
+              happy that you exist and that I got the chance to know you. 🫶 I
+              hope you keep smiling like you do, keep chasing your dreams, and
+              never let anyone take away that beautiful energy you have. May this
+              year bring you new memories, amazing opportunities, good people and
+              lots of happiness. ✨
             </p>
           </div>
 
