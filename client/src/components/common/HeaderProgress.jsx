@@ -9,25 +9,30 @@ const STAGES = [
   { id: 2, title: "Wishes", icon: "⭐" },
   { id: 3, title: "Trivia", icon: "💡" },
   { id: 4, title: "Cake", icon: "🎂" },
-  { id: 5, title: "Letter", icon: "💌" },
+  { id: 5, title: "Bubbles", icon: "🫧" },
+  { id: 6, title: "Letter", icon: "💌" },
 ];
 
 export default function HeaderProgress({ currentStep, onSelectStep, isDark }) {
   const [isPlaying, setIsPlaying] = useState(sounds.bgmPlaying);
   const [isMuted, setIsMuted] = useState(sounds.muted);
 
+  React.useEffect(() => {
+    return sounds.subscribe(({ isPlaying: playing, isMuted: muted }) => {
+      setIsPlaying(playing);
+      setIsMuted(muted);
+    });
+  }, []);
+
   if (currentStep === 0) return null; // Don't distract during the dark starry intro
 
   const toggleMusic = () => {
-    const active = sounds.toggleBGM();
-    setIsPlaying(active);
+    sounds.toggleBGM();
     sounds.playClick();
   };
 
   const toggleMute = () => {
-    const muted = sounds.toggleMute();
-    setIsMuted(muted);
-    if (muted) setIsPlaying(false);
+    sounds.toggleMute();
   };
 
   return (
@@ -45,10 +50,11 @@ export default function HeaderProgress({ currentStep, onSelectStep, isDark }) {
               Sanjana
             </h2>
             <p className="text-[9px] sm:text-[10px] text-rose-500 font-medium leading-none">
-              29·08·2008
+              29·08·2007
             </p>
           </div>
         </div>
+
 
         {/* Step dots */}
         <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1">

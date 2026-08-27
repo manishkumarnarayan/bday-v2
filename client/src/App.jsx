@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import CuteLoader from "./components/common/CuteLoader";
 import FloatingElements from "./components/common/FloatingElements";
 import AudioPlayer from "./components/common/AudioPlayer";
 import HeaderProgress from "./components/common/HeaderProgress";
@@ -14,11 +15,12 @@ import GameBubblePop from "./components/games/GameBubblePop";
 import ScratchCardFinale from "./components/pages/ScratchCardFinale";
 
 export default function App() {
+  const [isAudioLoaded, setIsAudioLoaded] = useState(false);
   const [currentStep, setCurrentStep] = useState(0); // 0 = dark cosmic intro
   const isDark = currentStep === 0;
 
   const handleNext = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 5));
+    setCurrentStep((prev) => Math.min(prev + 1, 6));
   };
 
   const handleSelectStep = (step) => {
@@ -28,6 +30,10 @@ export default function App() {
   const handleRestart = () => {
     setCurrentStep(0);
   };
+
+  if (!isAudioLoaded) {
+    return <CuteLoader onLoaded={() => setIsAudioLoaded(true)} />;
+  }
 
   return (
     <div
@@ -116,7 +122,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* {currentStep === 5 && (
+          {currentStep === 5 && (
             <motion.div
               key="game-bubbles"
               initial={{ opacity: 0, y: 20 }}
@@ -127,9 +133,9 @@ export default function App() {
             >
               <GameBubblePop onNext={handleNext} />
             </motion.div>
-          )} */}
+          )}
 
-          {currentStep === 5 && (
+          {currentStep === 6 && (
             <motion.div
               key="finale"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -147,7 +153,7 @@ export default function App() {
       {/* Cute Minimal Footer */}
       {!isDark && (
         <footer className="relative z-10 text-center py-4 text-xs text-rose-800/40 select-none">
-          Crafted with 💖 for Sanjana's Birthday · 29th August 2008
+          Crafted with 💖 for Sanjana's Birthday · 29th August 2007
         </footer>
       )}
     </div>

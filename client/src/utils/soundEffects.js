@@ -1,14 +1,31 @@
-// Web Audio API based sound synthesizer (no external audio files required)
+import bgAudioSrc from '../assets/bgaudio.mp3';
 
 class SoundFX {
   constructor() {
     this.ctx = null;
+    this.bgAudio = null;
     this.bgmPlaying = false;
-    this.bgmInterval = null;
     this.muted = false;
+    this.audioLoaded = false;
+    this.listeners = new Set();
   }
 
-  init() {
+  subscribe(listener) {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
+
+  notify() {
+    for (const listener of this.listeners) {
+      listener({
+        isPlaying: this.bgmPlaying,
+        isMuted: this.muted,
+        isLoaded: this.audioLoaded
+      });
+    }
+  }
+
+  initAudioContext() {
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) {
@@ -20,17 +37,94 @@ class SoundFX {
     }
   }
 
+  preloadAudio(onProgress) {
+    return new Promise((resolve) => {
+      // If already loaded
+      if (this.audioLoaded && this.bgAudio) {
+        if (onProgress) onProgress(100);
+        resolve(true);
+        return;
+      }
+
+      this.bgAudio = new Audio();
+      this.bgAudio.loop = true;
+      this.bgAudio.volume = 0.7;
+      this.bgAudio.preload = 'auto';
+
+      // Load using XMLHttpRequest for accurate download progress
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', bgAudioSrc, true);
+      xhr.responseType = 'blob';
+
+      xhr.onprogress = (event) => {
+        if (event.lengthComputable && onProgress) {
+          const percent = Math.min(99, Math.round((event.loaded / event.total) * 100));
+          onProgress(percent);
+        } else if (onProgress) {
+          // Fallback approximate progress
+          onProgress(75);
+        }
+      };
+
+      xhr.onload = () => {
+        if (xhr.status === 200 || xhr.status === 0) {
+          const blob = xhr.response;
+          const blobUrl = URL.createObjectURL(blob);
+          this.bgAudio.src = blobUrl;
+          this.audioLoaded = true;
+
+          // Ensure audio can play
+          const onCanPlay = () => {
+            this.bgAudio.removeEventListener('canplaythrough', onCanPlay);
+            if (onProgress) onProgress(100);
+            this.notify();
+            resolve(true);
+          };
+
+          this.bgAudio.addEventListener('canplaythrough', onCanPlay);
+          this.bgAudio.load();
+
+          // Safety timeout in case canplaythrough event delay
+          setTimeout(() => {
+            if (onProgress) onProgress(100);
+            this.notify();
+            resolve(true);
+          }, 400);
+        } else {
+          // Fallback to direct src
+          this.bgAudio.src = bgAudioSrc;
+          this.audioLoaded = true;
+          if (onProgress) onProgress(100);
+          this.notify();
+          resolve(true);
+        }
+      };
+
+      xhr.onerror = () => {
+        // Fallback directly
+        this.bgAudio.src = bgAudioSrc;
+        this.audioLoaded = true;
+        if (onProgress) onProgress(100);
+        this.notify();
+        resolve(true);
+      };
+
+      xhr.send();
+    });
+  }
+
   toggleMute() {
     this.muted = !this.muted;
-    if (this.muted && this.bgmPlaying) {
-      this.stopBGM();
+    if (this.bgAudio) {
+      this.bgAudio.muted = this.muted;
     }
+    this.notify();
     return this.muted;
   }
 
   playClick() {
     if (this.muted) return;
-    this.init();
+    this.initAudioContext();
     if (!this.ctx) return;
 
     try {
@@ -55,7 +149,7 @@ class SoundFX {
 
   playPop() {
     if (this.muted) return;
-    this.init();
+    this.initAudioContext();
     if (!this.ctx) return;
 
     try {
@@ -81,10 +175,10 @@ class SoundFX {
 
   playSparkle() {
     if (this.muted) return;
-    this.init();
+    this.initAudioContext();
     if (!this.ctx) return;
 
-    const notes = [523.25, 659.25, 783.99, 1046.5, 1318.51]; // C5, E5, G5, C6, E6
+    const notes = [523.25, 659.25, 783.99, 1046.5, 1318.51];
     notes.forEach((freq, idx) => {
       setTimeout(() => {
         try {
@@ -110,7 +204,7 @@ class SoundFX {
 
   playFanfare() {
     if (this.muted) return;
-    this.init();
+    this.initAudioContext();
     if (!this.ctx) return;
 
     const chords = [
@@ -146,7 +240,7 @@ class SoundFX {
 
   playBlowCandle() {
     if (this.muted) return;
-    this.init();
+    this.initAudioContext();
     if (!this.ctx) return;
 
     try {
@@ -181,7 +275,7 @@ class SoundFX {
 
   playScratch() {
     if (this.muted) return;
-    this.init();
+    this.initAudioContext();
     if (!this.ctx) return;
 
     try {
@@ -204,79 +298,38 @@ class SoundFX {
   }
 
   startBGM() {
-    if (this.muted || this.bgmPlaying) return;
-    this.init();
-    if (!this.ctx) return;
-    this.bgmPlaying = true;
+    this.initAudioContext();
+    if (!this.bgAudio) {
+      this.bgAudio = new Audio(bgAudioSrc);
+      this.bgAudio.loop = true;
+      this.bgAudio.volume = 0.7;
+    }
 
-    const melody = [
-      { note: 261.63, dur: 300 },
-      { note: 261.63, dur: 300 },
-      { note: 293.66, dur: 600 },
-      { note: 261.63, dur: 600 },
-      { note: 349.23, dur: 600 },
-      { note: 329.63, dur: 1200 },
+    if (this.muted) {
+      this.bgAudio.muted = true;
+    }
 
-      { note: 261.63, dur: 300 },
-      { note: 261.63, dur: 300 },
-      { note: 293.66, dur: 600 },
-      { note: 261.63, dur: 600 },
-      { note: 392.00, dur: 600 },
-      { note: 349.23, dur: 1200 },
+    if (!this.bgAudio.paused && this.bgmPlaying) {
+      return;
+    }
 
-      { note: 261.63, dur: 300 },
-      { note: 261.63, dur: 300 },
-      { note: 523.25, dur: 600 },
-      { note: 440.00, dur: 600 },
-      { note: 349.23, dur: 600 },
-      { note: 329.63, dur: 600 },
-      { note: 293.66, dur: 1200 },
-
-      { note: 466.16, dur: 300 },
-      { note: 466.16, dur: 300 },
-      { note: 440.00, dur: 600 },
-      { note: 349.23, dur: 600 },
-      { note: 392.00, dur: 600 },
-      { note: 349.23, dur: 1600 }
-    ];
-
-    let currentIdx = 0;
-    const playNext = () => {
-      if (!this.bgmPlaying || this.muted || !this.ctx) return;
-      const current = melody[currentIdx];
-      
-      try {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(current.note, this.ctx.currentTime);
-
-        const durationSec = current.dur / 1000;
-        gain.gain.setValueAtTime(0.045, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + durationSec);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + durationSec);
-      } catch (e) {
-        console.warn(e);
-      }
-
-      currentIdx = (currentIdx + 1) % melody.length;
-      this.bgmInterval = setTimeout(playNext, current.dur * 1.15);
-    };
-
-    playNext();
+    this.bgAudio.play()
+      .then(() => {
+        this.bgmPlaying = true;
+        this.notify();
+      })
+      .catch((err) => {
+        console.log("Audio autoplay prevented or waiting for interaction:", err);
+      });
   }
 
+
   stopBGM() {
-    this.bgmPlaying = false;
-    if (this.bgmInterval) {
-      clearTimeout(this.bgmInterval);
-      this.bgmInterval = null;
+    if (this.bgAudio) {
+      this.bgAudio.pause();
     }
+    this.bgmPlaying = false;
+    this.notify();
   }
 
   toggleBGM() {

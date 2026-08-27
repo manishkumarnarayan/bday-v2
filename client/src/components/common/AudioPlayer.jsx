@@ -4,25 +4,28 @@ import { sounds } from '../../utils/soundEffects';
 import { MusicIcon, VolumeXIcon } from './Icons';
 
 export default function AudioPlayer({ isDark = false }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(sounds.bgmPlaying);
+  const [isMuted, setIsMuted] = useState(sounds.muted);
+
+  useEffect(() => {
+    return sounds.subscribe(({ isPlaying: playing, isMuted: muted }) => {
+      setIsPlaying(playing);
+      setIsMuted(muted);
+    });
+  }, []);
 
   // During stages 1-6, audio controls are cleanly integrated in HeaderProgress
   if (!isDark) return null;
 
   const toggleMusic = () => {
-    const active = sounds.toggleBGM();
-    setIsPlaying(active);
+    sounds.toggleBGM();
     sounds.playClick();
   };
 
   const toggleMute = () => {
-    const muted = sounds.toggleMute();
-    setIsMuted(muted);
-    if (muted) {
-      setIsPlaying(false);
-    }
+    sounds.toggleMute();
   };
+
 
   return (
     <motion.div
