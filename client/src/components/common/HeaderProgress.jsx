@@ -9,8 +9,8 @@ const STAGES = [
   { id: 2, title: "Wishes", icon: "⭐" },
   { id: 3, title: "Trivia", icon: "💡" },
   { id: 4, title: "Cake", icon: "🎂" },
-  { id: 5, title: "Bubbles", icon: "🫧" },
-  { id: 6, title: "Letter", icon: "💌" },
+  // { id: 5, title: "Bubbles", icon: "🫧" },
+  { id: 5, title: "Letter", icon: "💌" },
 ];
 
 export default function HeaderProgress({ currentStep, onSelectStep, isDark }) {
@@ -50,11 +50,10 @@ export default function HeaderProgress({ currentStep, onSelectStep, isDark }) {
               Sanjana
             </h2>
             <p className="text-[9px] sm:text-[10px] text-rose-500 font-medium leading-none">
-              29·08·2007
+              29·08·2008
             </p>
           </div>
         </div>
-
 
         {/* Step dots */}
         <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1">

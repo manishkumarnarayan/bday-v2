@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { sounds } from '../../utils/soundEffects';
-import { SparklesIcon, HeartIcon } from './Icons';
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { sounds } from "../../utils/soundEffects";
+import { SparklesIcon, HeartIcon } from "./Icons";
 
 export default function CuteLoader({ onLoaded }) {
   const [progress, setProgress] = useState(0);
@@ -23,12 +23,11 @@ export default function CuteLoader({ onLoaded }) {
     onLoaded();
   };
 
-
   const getLoadingText = (pct) => {
-    if (pct < 30) return 'Gathering cosmic stardust for Sanjana... ✨';
-    if (pct < 65) return 'Tuning sweet birthday melodies... 🎵';
-    if (pct < 95) return 'Illuminating warm memories... 💖';
-    return 'Ready to celebrate Sanjana! 🎂';
+    if (pct < 30) return "Gathering cosmic stardust for Sanjana... ✨";
+    if (pct < 65) return "Tuning sweet birthday melodies... 🎵";
+    if (pct < 95) return "Illuminating warm memories... 💖";
+    return "Ready to celebrate Sanjana! 🎂";
   };
 
   return (
@@ -64,17 +63,17 @@ export default function CuteLoader({ onLoaded }) {
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           className="relative mb-6"
         >
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full neu-dark-flat flex items-center justify-center border border-rose-500/20 shadow-[0_0_40px_rgba(244,63,94,0.25)] relative">
             <span className="text-4xl sm:text-5xl filter drop-shadow">🎂</span>
-            
+
             {/* Orbiting Sparkle */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 6, ease: 'linear' }}
+              transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
               className="absolute inset-0 flex items-start justify-center pointer-events-none"
             >
               <span className="text-sm -mt-2">✨</span>
@@ -92,7 +91,7 @@ export default function CuteLoader({ onLoaded }) {
             Sanjana's Birthday
           </h2>
           <p className="text-[11px] sm:text-xs text-rose-400/70 uppercase tracking-widest font-mono">
-            29 · 08 · 2007
+            29 · 08 · 2008
           </p>
         </motion.div>
 
@@ -102,7 +101,7 @@ export default function CuteLoader({ onLoaded }) {
             className="h-full rounded-full bg-gradient-to-r from-rose-500 via-pink-400 to-amber-300 relative shadow-[0_0_12px_rgba(244,63,94,0.6)]"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ ease: 'easeOut', duration: 0.3 }}
+            transition={{ ease: "easeOut", duration: 0.3 }}
           >
             {/* Shimmer light effect */}
             <div className="absolute inset-0 bg-white/30 rounded-full animate-pulse" />
@@ -125,7 +124,7 @@ export default function CuteLoader({ onLoaded }) {
             <motion.div
               initial={{ opacity: 0, scale: 0.85, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className="w-full"
             >
               <button
@@ -133,7 +132,10 @@ export default function CuteLoader({ onLoaded }) {
                 className="w-full py-3.5 px-6 rounded-full text-xs sm:text-sm font-semibold tracking-wide text-rose-950 bg-gradient-to-r from-rose-200 via-pink-100 to-amber-100 shadow-[0_0_30px_rgba(251,191,36,0.5)] border border-white hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               >
                 <span>Enter Sanjana's Universe</span>
-                <SparklesIcon className="w-4 h-4 text-rose-600 animate-spin" style={{ animationDuration: '4s' }} />
+                <SparklesIcon
+                  className="w-4 h-4 text-rose-600 animate-spin"
+                  style={{ animationDuration: "4s" }}
+                />
               </button>
             </motion.div>
           )}

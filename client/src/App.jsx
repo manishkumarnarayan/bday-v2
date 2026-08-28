@@ -122,7 +122,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {currentStep === 5 && (
+          {/* {currentStep === 5 && (
             <motion.div
               key="game-bubbles"
               initial={{ opacity: 0, y: 20 }}
@@ -133,9 +133,9 @@ export default function App() {
             >
               <GameBubblePop onNext={handleNext} />
             </motion.div>
-          )}
+          )} */}
 
-          {currentStep === 6 && (
+          {currentStep === 5 && (
             <motion.div
               key="finale"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -153,7 +153,7 @@ export default function App() {
       {/* Cute Minimal Footer */}
       {!isDark && (
         <footer className="relative z-10 text-center py-4 text-xs text-rose-800/40 select-none">
-          Crafted with 💖 for Sanjana's Birthday · 29th August 2007
+          Crafted with 💖 for Sanjana's Birthday · 29th August 2008
         </footer>
       )}
     </div>
